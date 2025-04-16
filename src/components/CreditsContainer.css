@@ -1,0 +1,13 @@
+.credits{
+  background: rgba(30, 30, 47, 0.8); /* Fundo semi-transparente para o efeito de blur funcionar */
+  padding-inline: 2rem;
+  border-radius: 1rem;
+  margin-block: .5;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+  z-index: 1; /* Garantindo que a container apareça acima do backdrop-filter */
+  align-self: center;
+}
