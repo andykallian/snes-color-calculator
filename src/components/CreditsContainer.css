@@ -11,3 +11,9 @@
   z-index: 1; /* Garantindo que a container apareça acima do backdrop-filter */
   align-self: center;
 }
+
+@media (max-width: 600px) {
+  .credits{
+    width: 63vw;
+  }
+}

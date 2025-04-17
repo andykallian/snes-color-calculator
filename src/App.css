@@ -39,6 +39,7 @@ body::before {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: 1rem;
 
 }
@@ -69,9 +70,21 @@ input[type="number"] {
 
 
 
-.result {
-  margin-top: 2rem;
-  font-size: 1.2rem;
+@media (max-width: 600px) {
+  .containerRoot{
+    width: 100vw;
+    height: 100vh;
+    justify-content: flex-start;
+    
+  }
+  .container{
+    width: 63vw;
+  }
+
+  .credits{
+    width: 63vw;
+  }
 }
+
 
 
