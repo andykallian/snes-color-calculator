@@ -18,3 +18,11 @@
 .custom-color-input:hover {
   transform: scale(1.05);
 }
+
+
+@media (max-width: 600px) {
+  .color-picker-box{
+    margin: 0;
+  }
+
+}

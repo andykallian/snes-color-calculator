@@ -1,15 +1,23 @@
+html,
+body,
+.app {
+  height: 100%;
+}
+
 body {
   background: #1e1e2f;
   color: #fff;
   font-family: sans-serif;
   text-align: center;
-  margin: 0;
-  height: 100vh;
+  min-height: 100vh; /* Garante que a tela vai ocupar pelo menos 100vh */
+  height: 100%; /* Garante que o body ocupe 100% da altura da tela */
   display: flex;
   justify-content: center;
   align-items: center;
   background: url('/snes-bg.png') no-repeat center center fixed;
   background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   position: relative;
   z-index: -1;
 }
@@ -73,17 +81,34 @@ input[type="number"] {
 @media (max-width: 600px) {
   .containerRoot{
     width: 100vw;
-    height: 100vh;
-    justify-content: flex-start;
+    height: 95vh;
     
   }
   .container{
     width: 63vw;
+    height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
-  .credits{
-    width: 63vw;
+  .container h1{
+    font-size: 2em;
   }
+
+  .result p {
+    margin-block-start: .5em;
+    margin-block-end: .5em;
+  }
+
+  .section {
+    margin: 0;
+  }
+
+  .color-picker-box{
+    margin: 0;
+  }
+
 }
 
 

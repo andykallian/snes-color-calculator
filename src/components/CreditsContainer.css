@@ -15,5 +15,10 @@
 @media (max-width: 600px) {
   .credits{
     width: 63vw;
+    height: 7vh;
+  }
+
+  .credits p{
+    font-size: 8px;
   }
 }
