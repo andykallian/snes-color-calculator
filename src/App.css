@@ -67,6 +67,30 @@ body::before {
   flex-wrap: wrap;
 }
 
+.result{
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.result p{
+  margin-block: 0;
+}
+
+.snesbyte{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.snesbyte p{
+  margin-right: 0.25rem;
+}
+
+.snesbyte span{
+  margin-right: 0.375rem;
+}
+
 input[type="number"] {
   width: 80px;
   padding: 5px;
@@ -95,6 +119,7 @@ input[type="number"] {
   .container h1{
     font-size: 2em;
   }
+
 
   .result p {
     margin-block-start: .5em;

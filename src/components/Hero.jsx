@@ -6,8 +6,9 @@ import ColorPickerBox from '../components/ColorPickerBox';
 function Hero() {
   const [rgb, setRgb] = useState({ r: 240, g: 128, b: 49 });
   const [rgb8, setRgb8] = useState({ r: 30, g: 16, b: 6 });
-  const [hexValue, setHexValue] = useState('0');
-  const [snesHex, setSnesHex] = useState('');
+  const [hexValue, setHexValue] = useState('1A1E');
+  const [snesHexInput, setSnesHexInput] = useState('1A1E');
+  const [inputReadyToClear, setInputReadyToClear] = useState(false); // Se deve limpar no próximo dígito
 
   useEffect(() => {
     const r8 = Math.floor(rgb.r / 8);
@@ -16,6 +17,11 @@ function Hero() {
     setRgb8({ r: r8, g: g8, b: b8 });
     calculateHex(r8, g8, b8);
   }, [rgb]);
+
+  useEffect(() => {
+    // Sempre que o hexValue mudar, atualize o input SNES hex.
+    setSnesHexInput(hexValue);
+  }, [hexValue]);
 
   const updateFromRGB8 = (newRgb8) => {
     const newRgb = {
@@ -37,40 +43,59 @@ function Hero() {
   };
 
   const handleSnesInputChange = (e) => {
-    const value = e.target.value.toUpperCase();
-    setSnesHex(value);
+    let value = e.target.value.toUpperCase().replace(/^0X/, '');
 
-    if (!/^[0-9A-F]{1,4}$/.test(value)) {
-      return; // Se não for hex válido, ignora
+    // Remove qualquer caractere que não seja 0-9 A-F
+    value = value.replace(/[^0-9A-F]/g, '');
+
+    // Se já estava pronto para limpar (após 4 dígitos anteriores), reseta o input agora
+    if (inputReadyToClear) {
+      value = value.slice(-1); // mantém apenas o último caractere digitado
+      setInputReadyToClear(false); // depois de limpar, volta ao normal
     }
 
-    const snesValue = parseInt(value, 16);
+    value = value.slice(0, 4); // Limita para no máximo 4 caracteres
+    setSnesHexInput(value);
 
-    const r5 = snesValue & 0x1F;
-    const g5 = (snesValue >> 5) & 0x1F;
-    const b5 = (snesValue >> 10) & 0x1F;
+    if (value.length === 4) {
+      const snesValue = parseInt(value, 16);
 
-    const r8 = Math.round((r5 * 255) / 31);
-    const g8 = Math.round((g5 * 255) / 31);
-    const b8 = Math.round((b5 * 255) / 31);
+      const r5 = snesValue & 0x1F;
+      const g5 = (snesValue >> 5) & 0x1F;
+      const b5 = (snesValue >> 10) & 0x1F;
 
-    const newRgb = { r: r8, g: g8, b: b8 };
-    setRgb(newRgb);
+      const r8 = Math.round((r5 * 255) / 31);
+      const g8 = Math.round((g5 * 255) / 31);
+      const b8 = Math.round((b5 * 255) / 31);
 
-    const newRgb8 = { r: r5, g: g5, b: b5 };
-    setRgb8(newRgb8);
+      const newRgb = { r: r8, g: g8, b: b8 };
+      setRgb(newRgb);
 
-    calculateHex(r5, g5, b5);
+      const newRgb8 = { r: r5, g: g5, b: b5 };
+      setRgb8(newRgb8);
+
+      // Agora sinaliza que no próximo dígito deve limpar
+      setInputReadyToClear(true);
+    }
   };
 
   const calculateHex = (r8, g8, b8) => {
     const value = (b8 << 10) | (g8 << 5) | r8;
     const hex = value.toString(16).toUpperCase().padStart(4, '0');
     setHexValue(hex);
+
+    // Se o usuário não estiver digitando, sincroniza o input
+    if (!inputReadyToClear) {
+      setSnesHexInput(hex);
+    }
   };
 
   const toHex = (r, g, b) =>
     '#' + [r, g, b].map((x) => x.toString(16).padStart(2, '0')).join('');
+
+  const handleFocus = () => {
+    // Não faz nada especial ao focar agora
+  };
 
   return (
     <div className="container">
@@ -100,24 +125,25 @@ function Hero() {
       <div className="result">
         <p>📊 RGB/8: R = {rgb8.r}, G = {rgb8.g}, B = {rgb8.b}</p>
         <p>🧮 SNES Hex Value: {hexValue.slice(2)} {hexValue.slice(0, 2)}</p>
-        <p>🎯 Final SNES Byte: <code>0x{hexValue}</code></p>
-      </div>
-
-      <div className="section">
-        <h3>SNES Color Input</h3>
-        <div className="box">
-          <label>
-            <input
-              type="text"
-              value={snesHex}
-              onChange={handleSnesInputChange}
-              maxLength={4}
-              placeholder="Ex: 7FFF"
-            />
-          </label>
+        <div className="snesbyte">
+          <p >🎯 Final SNES Byte:</p>
+          <span>0x</span>
+          <input
+            type="text"
+            value={snesHexInput}
+            onChange={handleSnesInputChange}
+            onFocus={handleFocus}
+            maxLength={4}
+            placeholder="Ex: 7FFF"
+            style={{
+              width: '80px',
+              textTransform: 'uppercase',
+              textAlign: 'center',
+            }}
+          />
         </div>
       </div>
-    </div>  
+    </div>
   );
 }
 
