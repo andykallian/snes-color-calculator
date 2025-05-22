@@ -123,11 +123,13 @@ function Hero() {
       />
 
       <div className="result">
-        <p>📊 RGB/8: R = {rgb8.r}, G = {rgb8.g}, B = {rgb8.b}</p>
-        <p>🧮 SNES Hex Value: {hexValue.slice(2)} {hexValue.slice(0, 2)}</p>
+        <p> RGB/8: R = {rgb8.r}, G = {rgb8.g}, B = {rgb8.b}</p>
+        <p> SNES Hex Value: {hexValue.slice(0, 2)} {hexValue.slice(2)}</p>
+
+        <p> Little Endian: {hexValue.slice(2)} {hexValue.slice(0, 2)}</p>
         <div className="snesbyte">
-          <p >🎯 Final SNES Byte:</p>
-          <span>0x</span>
+          <p >🎯 Snes Hex Value:</p>
+          {/* <span>0x</span> */}
           <input
             type="text"
             value={snesHexInput}
