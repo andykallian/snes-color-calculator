@@ -7,8 +7,13 @@ function App() {
 
   return (
     <div className='containerRoot'>
-      <Hero/>
-      <CreditsContainer/>     
+      <div className='heroArea'>
+        <Hero/> 
+      </div>
+
+      <div className='creditsArea'>
+        <CreditsContainer/>     
+      </div>
     </div>
     
   );

@@ -4,7 +4,7 @@ import './ColorPickerBox.css';
 const ColorPickerBox = ({ color, onChange }) => {
   return (
     <div className="color-picker-box">
-      <label>Color</label>
+      <label></label>
       <input
         type="color"
         value={color}
