@@ -21,7 +21,17 @@ function Hero() {
   const [animateReset, setAnimateReset] = useState(false);
 
   useEffect(() => {
-    setPalette(Array(paletteSize).fill(null));
+    setPalette(prev => {
+      if (prev.length === paletteSize) return prev;
+
+      if (paletteSize > prev.length) {
+        return [
+          ...prev,
+          ...Array(paletteSize - prev.length).fill(null),
+        ];
+      }
+      return prev.slice(0, paletteSize);
+    });
   }, [paletteSize]);
 
   useEffect(() => {
@@ -142,6 +152,21 @@ function Hero() {
     setTimeout(() => setAnimateReset(false), 400);
   };
 
+  const formatPaletteOutput = () => {
+    const values = palette.filter(Boolean).map(c => c.littleEndian);
+
+    if (paletteSize === 8) {
+      return values.join(' | ');
+    }
+
+    const lines = [];
+    for (let i = 0; i < values.length; i += 8) {
+      lines.push(values.slice(i, i + 8).join(' | '));
+    }
+
+    return lines.join('\n');
+  };
+
   return (
     <div className="container">
 
@@ -168,7 +193,6 @@ function Hero() {
               placeholder="#FFAA33"
             />
           </div>
-
         </div>
 
         <RgbInputGroup
@@ -186,7 +210,6 @@ function Hero() {
           min={0}
           max={31}
         />
-
       </div>
 
       <div className="containerBox">
@@ -239,7 +262,7 @@ function Hero() {
           <textarea
             readOnly
             className="palette-output"
-            value={palette.filter(Boolean).map(c => c.littleEndian).join(' | ')}
+            value={formatPaletteOutput()}
           />
 
           <div className="palette-buttons">
@@ -247,14 +270,14 @@ function Hero() {
               className={`copy-button ${animateCopy ? 'clicked' : ''}`}
               onClick={handleCopyPalette}
             >
-              Copy palette
+              Copy
             </button>
 
             <button
               className={`reset-button ${animateReset ? 'clicked' : ''}`}
               onClick={handleResetPalette}
             >
-              Reset palette
+              Reset
             </button>
           </div>
         </div>
