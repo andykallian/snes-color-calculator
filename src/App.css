@@ -320,13 +320,13 @@ input[type="number"] {
   }
 
   .container {
-    width: 100%;
+    width: 90%;
     max-width: 100%;
     padding: 0.75rem;
   }
 
   .containerBox {
-    width: 100%;
+    width: 90%;
     padding: 0.75rem 0.5rem;
   }
 
@@ -340,7 +340,9 @@ input[type="number"] {
 
   .section,
   .box {
-    width: 100%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
   }
 
   input[type="number"] {
@@ -352,7 +354,6 @@ input[type="number"] {
   /* ===== SNES HEX ===== */
 
   .snesbyte {
-    flex-direction: column;
     gap: 0.25rem;
   }
 

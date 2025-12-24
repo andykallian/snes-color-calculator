@@ -12,11 +12,12 @@
 
 @media (max-width: 600px) {
   .credits{
-    width: 63vw;
+    width: 90%;
     height: 7vh;
+    text-align: center;
   }
 
   .credits p{
-    font-size: 8px;
+    font-size: 15px;
   }
 }
