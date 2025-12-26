@@ -3,15 +3,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 1.5rem 0;
 }
 
 .custom-color-input {
   width: 80%;
-  cursor: pointer;
-  height: 2.625rem;
-  background: none;
-  cursor: pointer;
+  height: 60px;
   border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 5px #0003;
+  transition: transform 0.2s ease;
 }
 
 .custom-color-input:hover {

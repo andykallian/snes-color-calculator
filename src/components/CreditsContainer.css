@@ -1,23 +1,73 @@
-.credits{
-  background: rgba(30, 30, 47, 0.8);
-  padding: 0.8rem;
-  border-radius: 1rem;
-  box-shadow: 0 0.25rem 0.9375rem rgba(0, 0, 0, 0.1);
-  text-align: center;
-  max-width: 31.25rem;
-  width: 100%;
+.credits {
   position: relative;
+
+  background: linear-gradient(
+    180deg,
+    rgba(40, 40, 65, 0.85),
+    rgba(25, 25, 40, 0.85)
+  );
+
+  padding: 0.8rem 1rem;
+  border-radius: 1rem;
+  width: 82%;
+
+  backdrop-filter: blur(10px);
+
+  box-shadow:
+    0 0 0 1px rgba(120, 140, 255, 0.25),
+    0 0 18px rgba(90, 120, 255, 0.18),
+    0 12px 28px rgba(0, 0, 0, 0.6);
+
+  text-align: center;
   z-index: 1;
 }
 
+/* relevo / borda iluminada */
+.credits::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(140, 160, 255, 0.45),
+    rgba(180, 120, 255, 0.15),
+    rgba(140, 160, 255, 0.45)
+  );
+
+  /* Standard property */
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+
+  /* WebKit fallback */
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+
+  pointer-events: none;
+}
+
+/* texto */
+.credits p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #e6e8ff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* responsivo */
 @media (max-width: 600px) {
-  .credits{
+  .credits {
     width: 90%;
-    height: 7vh;
-    text-align: center;
+    padding: 0.6rem 0.8rem;
   }
 
-  .credits p{
-    font-size: 15px;
+  .credits p {
+    font-size: 0.9rem;
   }
 }

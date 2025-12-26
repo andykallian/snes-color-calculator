@@ -5,13 +5,13 @@ import ColorPickerBox from '../components/ColorPickerBox';
 
 function Hero() {
 
-  const [rgb, setRgb] = useState({ r: 240, g: 128, b: 49 });
-  const [rgb8, setRgb8] = useState({ r: 30, g: 16, b: 6 });
+  const [rgb, setRgb] = useState({ r: 255, g: 255, b: 255 });
+  const [rgb8, setRgb8] = useState({ r: 31, g: 31, b: 31 });
 
-  const [hexInput, setHexInput] = useState('#F08031');
+  const [hexInput, setHexInput] = useState('#FFFFFF');
 
-  const [hexValue, setHexValue] = useState('1A1E');
-  const [snesHexInput, setSnesHexInput] = useState('1A1E');
+  const [hexValue, setHexValue] = useState('7FFF');
+  const [snesHexInput, setSnesHexInput] = useState('7FFF');
   const [inputReadyToClear, setInputReadyToClear] = useState(false);
 
   const [paletteSize, setPaletteSize] = useState(8);
@@ -171,7 +171,7 @@ function Hero() {
     <div className="container">
 
       <div className="containerBox">
-        <h1>SNES Color Calculator</h1>
+        <h1>SN Color Calculator</h1>
       </div>
 
       <div className="containerBox">
