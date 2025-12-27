@@ -171,9 +171,9 @@ function Hero() {
     <div className="container">
 
       <div className="containerBox">
+        {/* <img src="icon.png" alt="" /> */}
         <h1>SN Color Calculator</h1>
       </div>
-
       <div className="containerBox">
 
         <div className="color-input-row">
